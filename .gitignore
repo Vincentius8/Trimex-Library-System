@@ -2,3 +2,16 @@
 vendor/
 node_modules/
 *.log
+# Ignore environment config
+.env
+
+# Composer vendor folder
+/vendor/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE configs
+.vscode/
+.idea/
