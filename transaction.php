@@ -316,11 +316,11 @@ try {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Type</th>
+            
             <th>Library ID</th>
             <th>Student Name</th>
             <th>Book Title</th>
+            <th>Type</th>
             <th>Start Date</th>
             <th>Due Date</th>
             <th>Return Date</th>
@@ -336,11 +336,12 @@ try {
     $blockEdit = ($statusLower === 'returned' || $statusLower === 'cancelled');
   ?>
     <tr>
-      <td><?php echo htmlspecialchars($row['id']); ?></td>
-      <td><?php echo htmlspecialchars($row['record_type']); ?></td>
+    
+     
       <td><?php echo htmlspecialchars($row['library_id']); ?></td>
       <td><?php echo htmlspecialchars($row['student_name']); ?></td>
       <td><?php echo htmlspecialchars($row['title']); ?></td>
+       <td><?php echo htmlspecialchars($row['record_type']); ?></td>
       <td><?php echo htmlspecialchars($row['start_date']); ?></td>
       <td><?php echo htmlspecialchars($row['due_date']); ?></td>
       <td><?php echo $row['return_date'] ? htmlspecialchars($row['return_date']) : "N/A"; ?></td>
