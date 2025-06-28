@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Blurred Background */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('img/trimex bldg.jpg') no-repeat center center/cover;
+    filter: blur(8px);
+    z-index: -1; /* Make sure the blur is behind the content */
+}
+
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    background: #222;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.back-button i {
+    margin-right: 8px;
+}
+
+/* Page Layout */
+.container {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.container-box {
+    display: flex;
+    width: 85%;
+    max-width: 900px;
+    background: #2c2c2c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.left-panel {
+    width: 50%;
+    background: url('img/ECD_8341.jpg') no-repeat center center/cover;
+}
+
+.right-panel {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+/* Login Box */
+.login-box {
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #dcdcdc;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ddd;
+}
+
+.forgot-password {
+    display: block;
+    margin: 3px 0 0 auto;
+    color: #639fe4;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: left;
+    width: fit-content;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.login-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+.login-btn:hover {
+    background: #bb2c27;
+}
+
+.signup-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color:rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 50px;
+    border: 1px solid white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+    background-color: #868686; /* Darker green on hover */
+}
+
+.signup-btn:focus {
+    outline: none;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container-box {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .left-panel, .right-panel {
+        width: 100%;
+    }
+
+    .right-panel {
+        padding: 20px;
+    }
+
+    .login-box {
+        max-width: 300px;
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+  }
+  .close {
+    float: right;
+    cursor: pointer;
+  }
+
+ /* Responsive Navbar (for mobile) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .back-button {
+        display: none;
+    }
+
+    .navbar-title {
+        font-size: 16px;
+    }
+}
+
+
+/* Full-Screen Background Fix for Mobile */
+@media (max-width: 480px) {
+    body::after {
+        background-size: cover;
+        background-position: center;
+    }
+
+    .navbar {
+        padding: 32px 15px;
+    }
+
+    .back-button {
+        font-size: 18px;
+    }
+
+    .login-box {
+        max-width: 280px;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    input, button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+}

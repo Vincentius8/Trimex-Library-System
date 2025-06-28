@@ -1,0 +1,176 @@
+/* Base Reset/Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(
+      135deg,
+      #f0f2f5 0%,
+      #e6e8eb 100%
+    );
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background: #fff;
+    padding: 40px;
+    width: 550px;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    animation: fadeIn 0.6s ease-in-out;
+    position: relative;
+  }
+
+  .container img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 120px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: inline-block;
+    font-size: 14px;
+    color: #555;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  input:focus {
+    border-color: #c91313;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(201, 19, 19, 0.1);
+  }
+
+  /* Two-column row styling */
+  .row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .row .form-field {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background-color: #c91313;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  button:hover {
+    background-color: #a60e0e;
+    transform: scale(1.02);
+  }
+
+  .form-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .form-footer a {
+    color: #c91313;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .form-footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Message Styles */
+  .message {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+  .error {
+    color: red;
+  }
+  .success {
+    color: green;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInDown 0.6s ease forwards;
+  }
+
+  /* Fade in container */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade in for success message itself */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade-out animation for container */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+  .fade-out {
+    animation: fadeOut 1s forwards;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      width: 90%;
+    }
+    .row {
+      flex-direction: column;
+    }
+  }

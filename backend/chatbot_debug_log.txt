@@ -1,0 +1,50 @@
+Array
+(
+    [error] => Array
+        (
+            [message] => Incorrect API key provided: sk-your-*************here. You can find your API key at https://platform.openai.com/account/api-keys.
+            [type] => invalid_request_error
+            [param] => 
+            [code] => invalid_api_key
+        )
+
+)
+User: hi
+API Response:
+Array
+(
+    [error] => Array
+        (
+            [message] => Incorrect API key provided: sk-your-*************here. You can find your API key at https://platform.openai.com/account/api-keys.
+            [type] => invalid_request_error
+            [param] => 
+            [code] => invalid_api_key
+        )
+
+)
+User: panong wala?
+API Response:
+Array
+(
+    [error] => Array
+        (
+            [message] => Incorrect API key provided: sk-your-*************here. You can find your API key at https://platform.openai.com/account/api-keys.
+            [type] => invalid_request_error
+            [param] => 
+            [code] => invalid_api_key
+        )
+
+)
+User: bkit nga bobo kaba
+API Response:
+Array
+(
+    [error] => Array
+        (
+            [message] => Incorrect API key provided: sk-your-*************here. You can find your API key at https://platform.openai.com/account/api-keys.
+            [type] => invalid_request_error
+            [param] => 
+            [code] => invalid_api_key
+        )
+
+)

@@ -1,0 +1,330 @@
+/* Base Styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f4f8;
+  color: #444;
+  overflow-x: hidden;
+}
+:root {
+  --primary-color: #7B1113;
+  --secondary-color: #990f17;
+  --dark-bg: #1f1f1f;
+  --light-bg: #f9f9fb;
+  --transition: 0.3s ease;
+}
+/* SIDENAV */
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(180deg, var(--dark-bg), #333);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  overflow-x: hidden;
+  transition: width var(--transition);
+  padding-top: 60px;
+  z-index: 1000;
+}
+.sidenav.open { width: 260px; }
+.sidenav a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 1rem;
+  position: relative;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.sidenav a:hover, .sidenav a.active {
+  background: rgba(123,17,19,0.8);
+  color: #fff;
+  transform: scale(1.03);
+}
+.sidenav a:hover::before, .sidenav a.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--primary-color);
+}
+.sidenav .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 25px;
+  color: #bbb;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.sidenav .close-btn:hover { color: #fff; }
+.logout-link {
+  display: block;
+  text-align: center;
+  background: #2a2a2a;
+  color: #fff;
+  margin: 20px 15px 0;
+  padding: 12px 0;
+  border-radius: 4px;
+  transition: background var(--transition);
+}
+.logout-link:hover { background: var(--primary-color); }
+/* Dropdown Styles for Statistical Reports */
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle {
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  background: #333;
+  margin-left: 15px;
+  border-left: 4px solid var(--primary-color);
+}
+.dropdown-content .dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  transition: background var(--transition), color var(--transition);
+}
+.dropdown-content .dropdown-item:hover {
+  background: rgba(123,17,19,0.8);
+  color: #fff;
+}
+.dropdown.active .dropdown-content {
+  display: block;
+}
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 900;
+}
+.overlay.show { opacity: 1; pointer-events: all; }
+/* TOPBAR */
+.topbar {
+  background: linear-gradient(90deg, #fff, #f7f7f7);
+  padding: 15px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 800;
+}
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #333;
+  transition: transform var(--transition), color var(--transition);
+}
+.menu-icon:hover {
+  transform: scale(1.2);
+  color: var(--primary-color);
+}
+.page-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.page-title .logo {
+  max-height: 40px;
+  width: auto;
+}
+/* MAIN CONTENT */
+#main {
+  transition: margin-left var(--transition);
+  margin-left: 0;
+  padding: 20px;
+}
+#main.pushed { margin-left: 260px; }
+/* Greeting */
+.greeting {
+  margin: 20px 0;
+  padding: 20px;
+  background: #fff;
+  border-left: 5px solid var(--primary-color);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards var(--transition);
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.greeting h1 { font-size: 1.8rem; margin-bottom: 5px; color: black; }
+.greeting p { font-size: 1rem; color: black; }
+/* Reports & Stats Section */
+.reports-section {
+  background: #fff;
+  padding: 30px;
+  border-radius: 6px;
+  margin-top: 30px;
+}
+/* Reports Header */
+.reports-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.logo-container .logo {
+  max-height: 60px;
+  width: auto;
+}
+.header-text h2 {
+  color: black;
+  margin: 0;
+}
+.header-text p {
+  color: black;
+  margin: 0;
+}
+/* Year Filter Form positioned inside the chart container */
+.year-filter-form {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.year-filter-form select {
+  padding: 5px;
+  font-size: 1rem;
+}
+/* Print Button Container */
+.print-button-container {
+  text-align: right;
+  margin: 20px 0;
+}
+.print-button,
+.attendance-button {
+  width: 150px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 10px;
+  background: linear-gradient(to right, #A81017, #7B1113) !important;
+}
+.print-button:hover,
+.attendance-button:hover {
+  background-color: var(--secondary-color);
+}
+/* Layout for Table & Bar Chart */
+.report-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* TABLE CONTAINER (Left) */
+.table-container {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+.above-table-filters {
+  margin-bottom: 10px;
+  text-align: left;
+}
+.above-table-filters label {
+  margin-right: 10px;
+  font-size: 0.9rem;
+  color: #444;
+}
+/* Monthly Totals Table */
+.monthly-table {
+  width: 90%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.monthly-table th, .monthly-table td {
+  border: 1px solid black;
+  padding: 3px;
+  text-align: center;
+}
+.monthly-table th {
+  background-color: var(--light-bg);
+}
+.prepared-by {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+}
+/* Pie & Table side-by-side container */
+.table-pie-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.pie-chart-wrapper {
+  max-width: 200px;
+  margin: 0 auto;
+}
+.pie-chart-wrapper canvas {
+  max-height: 200px;
+  display: block;
+  margin: 0 auto;
+}
+/* BAR CHART CONTAINER (Right) */
+.chart-container {
+  flex: 0 0 75%;
+  max-width: 65%;
+  position: relative;
+  height: 700px; /* Adjust as needed for print */
+}
+.chart-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Print rules */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .reports-section, .reports-section * {
+    visibility: visible;
+  }
+  .reports-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    page-break-inside: avoid;
+  }
+  .print-button,
+  .attendance-button {
+    display: none;
+  }
+  html { zoom: 0.6; }
+  @page { size: landscape; margin: 10mm; }
+}

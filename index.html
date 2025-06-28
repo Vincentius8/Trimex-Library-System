@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Trimex Library</title>
+  <link rel="icon" type="image/x-icon" href="img/LIBRARY LOGO.png">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-rO3NE/OJ/0x1/lY4GkqJS5sRIF+q7XHJX/9q1iWRW6PJZJ0WbP3GP3C5w1qTtazM+Qh9Whi5FEFE4lCjJJ3jmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* Basic Page Resets */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.801);
+      transition: all 0.5s ease-in-out;
+      backdrop-filter: blur(10px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      padding: 10px 30px;
+    }
+    .navbar-brand img {
+      margin-right: 15px;
+    }
+    .navbar-nav {
+      gap: 10px;
+    }
+    .navbar-nav .nav-link {
+      color: rgb(0, 0, 0);
+      font-size: 1rem;
+      padding: 8px 12px;
+      transition: color 0.4s ease-in-out;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: #ff3b3b;
+    }
+
+    /* Hero Background (Home Section) */
+    .bg-image {
+      background: url('img/ECD_8337.jpg') center/cover no-repeat;
+      position: relative;
+      height: 100vh;
+    }
+    .bg-image::before {
+      content: "";
+      position: absolute;
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Centered Hero Content */
+    .hero-content {
+      position: absolute;
+      top: 50%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      animation: fadeUp 1.5s ease-in-out;
+      z-index: 2;
+    }
+    .hero-content h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 500;
+      font-size: 4rem;
+      margin-bottom: .1rem;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+      letter-spacing: 2px;
+    }
+    .btn-view {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 8px 15px;
+      font-size: 1rem;
+      margin-top: 0;
+      transition: all 0.4s ease-in-out;
+      font-weight: 500;
+    }
+    .btn-view:hover {
+      background-color: #fff;
+      border-color: #fff;
+      color: rgb(58, 143, 255);
+      transform: scale(1.1);
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translate(-50%, -40%); }
+      100% { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Gallery Section (Tatlong Larawan) */
+    #gallery {
+      padding: 60px 0;
+      background-color: #f8f9fa;
+    }
+    #gallery .img-modal-trigger {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #gallery .img-modal-trigger:hover {
+      transform: scale(0.9); /* Zoom out effect */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.7);
+    }
+
+    /* Core Values Section */
+    #core-values {
+      padding: 60px 0;
+      background-color: #f8f9fa;
+    }
+    #core-values h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    #core-values h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.25rem;
+      color: #000;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    #core-values p {
+      max-width: 700px; /* Limit text width */
+      text-align: left;
+    }
+    #core-values .core-img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+    }
+    #core-values .container {
+      max-width: 3000px; /* Adjust the width as needed */
+      height: 600px;
+      width: 100%; /* Makes it responsive */
+      margin: 0 auto; /* Centers the container */
+      padding: 40px 20px; /* Adds more spacing */
+      box-shadow: 0px -10px 15px -5px rgba(0, 0, 0, 0.2);
+      justify-content: space-between; /* Aligns content */
+      align-items: center; /* Vertically centers content */
+      background-color: white; /* Background color */
+    }
+    /* Picture Banner Section (narrower version) */
+    #banner {
+      height: 500px;
+      overflow: hidden;
+    }
+    #banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* About Section */
+    #about {
+      position: relative;
+      padding: 80px 0;
+      background-color: #fff;
+    }
+    #about .lead {
+      color: #555;
+    }
+    #about h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #000;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #about h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #000;
+    }
+    #about p {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Card Layout for Mission, Vision, Developer Info */
+    .card {
+      background-color: #fff;
+      border: none;
+      color: #333;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .card p {
+      color: #555;
+    }
+    .card h3 {
+      color: #ff3b3b;
+    }
+
+    /* Developer Profile Images */
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-bottom: 15px;
+    }
+
+    /* Full-Screen Overlay for RFID Result */
+    #rfidOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 9999;
+      color: #fff;
+      padding: 20px;
+    }
+    #overlayContent {
+      max-width: 600px;
+      border: 2px solid #fff;
+      padding: 40px 20px;
+      border-radius: 8px;
+      position: relative;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    #profileImage {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 20px;
+      border: 3px solid #fff;
+    }
+    #userName {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    #userLibraryId {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    #attendanceMessage {
+      font-size: 1rem;
+    }
+
+    :root {
+      --primary-color: #fd0c0c;
+      --secondary-color: #c40303;
+      --bg-color: #f4f7fc;
+      --text-color: #333;
+      --border-radius: 10px;
+      --transition-speed: 0.3s;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* TOP NAVIGATION BAR */
+    .topbar {
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .topbar .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: color var(--transition-speed);
+    }
+    .topbar .back-btn i {
+      font-size: 1.2rem;
+    }
+    .topbar .back-btn:hover {
+      color: var(--primary-color);
+    }
+
+    /* NOTIFICATION AREA */
+    .notification-area {
+      position: relative;
+      cursor: pointer;
+      margin-left: auto;
+    }
+    .notification-area i {
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+    .notification-area .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--primary-color);
+      color: #fff;
+      border-radius: 50%;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.8rem;
+    }
+    .notification-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 120%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      width: 300px;
+      z-index: 1001;
+    }
+    .notification-dropdown .notification-item {
+      padding: 0.8rem;
+      border-bottom: 1px solid #eee;
+    }
+    .notification-dropdown .notification-item:last-child {
+      border-bottom: none;
+    }
+    .notification-dropdown .notification-item p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    .notification-dropdown .notification-item small {
+      display: block;
+      color: #777;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+    }
+
+    /* COVER PHOTO */
+    .cover-photo {
+      width: 100%;
+      height: 350px;
+      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url("https://via.placeholder.com/1200x400?text=Cover+Photo");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* PROFILE SECTION */
+    .profile-section {
+      width: 80%;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      transform: translateY(-75px);
+      margin-bottom: -60px;
+    }
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1rem 1.5rem;
+    }
+    .avatar {
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      background-color: #fff;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    .avatar:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .profile-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .profile-details h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+    }
+    .profile-details p {
+      color: #555;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Updated Button Styling for Edit Profile & Change Password */
+    .edit-profile-btn {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      padding: 10px 10px;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .edit-profile-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Container for buttons side by side */
+    .button-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 1px;
+      width: 350px;
+      height: 40px;
+    }
+    .button-container button {
+      flex: 1;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      width: 80%;
+      max-width: 1000px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      animation: fadeInUp var(--transition-speed) ease;
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SCROLLABLE CONTAINER FOR BOOK LISTS */
+    .scroll-container {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 0.5rem;
+    }
+
+    /* BOOK LIST */
+    .book-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .book-item {
+      display: flex;
+      gap: 1rem;
+      background: #fdfdfd;
+      border-radius: var(--border-radius);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      margin-bottom: 1rem;
+      padding: 0.8rem;
+      align-items: flex-start;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      min-height: 90px;
+    }
+    .book-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .book-item img {
+      width: 60px;
+      height: 80px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .book-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .book-info strong {
+      font-size: 1rem;
+      color: #222;
+    }
+    .book-info small {
+      color: #666;
+    }
+    .book-info .fine {
+      color: #d9534f;
+      font-weight: bold;
+    }
+
+    /* MODALS */
+    .modal { 
+      display: none;
+      position: fixed;
+      z-index: 3000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 5% auto;
+      padding: 1.5rem 2rem;
+      border-radius: var(--border-radius);
+      max-width: 500px;
+      position: relative;
+      animation: fadeIn var(--transition-speed) ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+    .modal-close {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      cursor: pointer;
+      transition: color var(--transition-speed);
+    }
+    .modal-close:hover {
+      color: #000;
+    }
+    .modal form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .modal form label {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .modal form input[type="text"],
+    .modal form input[type="email"],
+    .modal form input[type="file"] {
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .modal form input[type="submit"] {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background var(--transition-speed);
+      margin-top: 0.5rem;
+    }
+    .modal form input[type="submit"]:hover {
+      background: var(--secondary-color);
+    }
+
+    /* IMAGE PREVIEW MODAL */
+    #imagePreviewModal {
+      display: none;
+      position: fixed;
+      z-index: 4000;
+      left: 0; 
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      text-align: center;
+    }
+    #imagePreviewModal .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: color var(--transition-speed);
+    }
+    #imagePreviewModal .modal-close:hover {
+      color: var(--primary-color);
+    }
+    #imagePreviewModal .modal-image {
+      margin-top: 5%;
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      animation: fadeInUp var(--transition-speed) ease;
+    }
+    /* Styling for the password container and toggle icon */
+    .password-container {
+        position: relative;
+        margin-bottom: 1rem;
+      }
+      .password-container input[type="password"],
+      .password-container input[type="text"] {
+        width: 100%;
+        padding: 0.6rem 2.5rem 0.6rem 0.6rem; /* extra right padding for icon */
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      .password-container .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+      }
+      
+      /* Footer Section */
+      footer {
+  background-color: #222;
+  color: white;
+  /* Reduced the vertical padding from 50px to 20px */
+  padding: 20px 0; 
+  text-align: center;
+}
+
+/* (Optional) Make footer text a bit smaller */
+footer h3,
+footer p,
+footer a {
+  font-size: 0.9rem; 
+}
+      .social-icons a {
+        margin: 0 10px;
+        color: white;
+        transition: 0.3s;
+      }
+      .social-icons a:hover {
+        color: #ff3b3b;
+      }
+    /* Mobile View Adjustments */
+    @media only screen and (max-width: 768px) {
+
+      html, body {
+    overflow-x: hidden;
+  }
+      .navbar {
+        padding: 10px 15px;
+      }
+      .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+      }
+      .hero-content h1 {
+        font-size: 30px;
+      }
+      .btn-view {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+      #gallery {
+        padding: 40px 0;
+      }
+      #gallery .img-modal-trigger {
+        height: auto;
+      }
+      /* Mobile adjustments for Core Values Section */
+      #core-values .row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      #core-values .core-img {
+        max-width: 80%;
+        margin-bottom: 20px;
+      }
+      #core-values h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      #core-values h3 {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+      #core-values p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      /* Mobile adjustments for Banner Section */
+      #banner {
+        height: 300px; /* Adjust banner height for mobile */
+        margin-top:80%;
+        width:fit-content;
+      }
+      #banner img {
+        height: 100%;
+        object-fit: cover;
+      }
+      #about {
+        padding: 40px 0;
+      }
+      #about h2 {
+        font-size: 2.5rem;
+      }
+      #about p {
+        font-size: 1rem;
+      }
+      .card {
+        margin-bottom: 20px;
+      }
+      #overlayContent {
+        max-width: 90%;
+        padding: 20px;
+      }
+      /* Additional Mobile Responsive Adjustments for Images and Logos */
+      .navbar-brand img {
+        max-height: 30px;
+        width: auto;
+      }
+      .bg-image {
+        background-position: center;
+        background-size: cover;
+      }
+      #gallery img {
+        height: auto;
+        object-fit: cover;
+        max-width: 100%;
+        margin-left:2px;
+        
+      }
+      .core-img {
+        max-width: 100%;
+        height: auto;
+      }
+      .profile-img {
+        width: 100px;
+        height: 100px;
+      }
+      #gallery .img-modal-trigger {
+       height: 190px !important;
+       width: 850px !important;
+  }
+    }
+
+    /* Additional CSS for Fade-Out Transition */
+    .fade-out {
+      animation: fadeOut 1s ease forwards;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="70">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="img/Trimexlogo1.png" alt="Trimex Colleges" height="40">
+          <img src="img/LIBRARY LOGO.png" alt="Library Logo" height="50">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" 
+              aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Core Values</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                  <!-- Download Link for Trimex Library App -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://studyhub.trimexcolleges.com/downloads/Trimex Library.apk" download>
+            Download App
+          </a>
+        </li>
+          <li class="nav-item"><a class="nav-link" href="https://zendy.io/" target="_blank">E-Books</a></li>
+          <li class="nav-item"><a class="nav-link" href="choose.html">Log In</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section (Hero) -->
+  <div id="home" class="bg-image">
+    <div class="hero-content">
+      <h1>Welcome to Trimex Library</h1>
+      <button class="btn btn-view" id="viewBooksBtn">VIEW MANUAL</button>
+    </div>
+  </div>
+
+  <!-- Gallery Section (Three Images) -->
+  <section class="py-5" id="gallery">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        <!-- Image 1 -->
+        <div class="col-md-4 text-center">
+          <img src="24/1.png" alt="Picture 1" class="img-fluid w-100 img-modal-trigger" style="height: 250px; object-fit: cover; cursor: pointer;">
+        </div>
+        <!-- Image 2 -->
+        <div class="col-md-4 text-center">
+          <img src="24/2.png" alt="Picture 2" class="img-fluid w-100 img-modal-trigger" style="height: 250px; object-fit: cover; cursor: pointer;">
+        </div>
+        <!-- Image 3 -->
+        <div class="col-md-4 text-center">
+          <img src="24/3.png" alt="Picture 3" class="img-fluid w-100 img-modal-trigger" style="height: 250px; object-fit: cover; cursor: pointer;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values Section -->
+  <section id="core-values">
+    <div class="container">
+      <h2>Trimex Library focuses on 3 core values</h2>
+      <div class="row justify-content-center align-items-center g-5">
+        <!-- Replace with your own image path -->
+        <div class="col-md-4 text-center">
+          <img src="img/sad.jpg" alt="Core Values Illustration" class="img-fluid core-img">
+        </div>
+        <div class="col-md-8">
+          <h3>Intellectual Freedom</h3>
+          <p>
+            Libraries champion the free exchange of ideas, ensuring access to diverse, unbiased information. This commitment to neutrality is a cornerstone of democratic knowledge sharing.
+          </p>
+          <h3>Lifelong Learning</h3>
+          <p>
+            As institutions that have historically supported education, libraries foster continuous personal and professional development. They curate resources and programs that honor academic traditions while propelling future self-improvement.
+          </p>
+          <h3>Community Engagement</h3>
+          <p>
+            At the heart of every library is a commitment to serve as a community hub—facilitating access, hosting collaborative initiatives, and encouraging civic participation to integrate collective wisdom with modern demands.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Picture Banner Section (narrow version) -->
+  <section id="banner">
+    <img src="img/Untitled design (1).png" alt="Banner">
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="text-center">About Trimex Library</h2>
+      <p class="lead text-center">
+        Trimex Library offers a rich collection of resources and a welcoming environment for learning and growth.
+      </p>
+      <!-- Mission & Vision Cards -->
+      <div class="row mt-5 g-5 justify-content-center">
+        <div class="col-md-5 mission">
+          <div class="card p-4 h-100">
+            <h3 class="mb-3">Our Mission</h3>
+            <p>
+              The library commits itself to the optimum development of the persons in the community, provide effective materials for instruction, pursue research and undertake responsive services.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-5 vision">
+          <div class="card p-4 h-100">
+            <h3 class="mb-3">Our Vision</h3>
+            <p>
+              The library envision itself a wide range of information, resources and services to all personnel, faculty, students and to the academic community for the transformation of individuals and Christ- centered steward of the community.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Developer Info Card -->
+      <div class="row mt-5 justify-content-center">
+        <div class="col-md-8">
+          <div class="card p-4 text-center">
+            <h5 class="mb-4">The System Developed By:</h5>
+            <div class="row justify-content-center g-4">
+              <div class="col-md-4 d-flex flex-column align-items-center">
+                <img src="img/jv.jpg" alt="John Vincent Pangilinan" class="profile-img">
+                <h6>John Vincent Pangilinan</h6>
+              </div>
+              <div class="col-md-4 d-flex flex-column align-items-center">
+                <img src="img/zzs.jpeg" alt="Ranzel Lodor" class="profile-img">
+                <h6>Ranzel Lodor</h6>
+              </div>
+            </div>
+            <p class="mt-4 mb-0">
+              This Library System is developed by John Vincent Pangilinan and Ranzel Lodor, Intern BSIT Students of the batch 2024 to 2025.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fullscreen Overlay for RFID Reading -->
+  <div id="rfidOverlay">
+    <div id="overlayContent">
+      <img id="profileImage" src="img/placeholder.png" alt="User Profile">
+      <h2 id="userName"></h2>
+      <p id="userLibraryId"></p>
+      <p id="attendanceMessage"></p>
+    </div>
+  </div>
+
+  <!-- Error Modal for RFID Not Found -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="errorModalBody">
+          Account or ID does not exist.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="container">
+      <h3>Contact Us</h3>
+      <p>📍 Address: Morales Bldg. Brgy San Antonio, Biñan, Laguna</p>
+      <p>📧 Email: library@trimexcolleges.edu.ph</p>
+      <p>🌐 Website: <a href="https://studyhub.trimexcolleges.com/">https://studyhub.trimexcolleges.com/</a></p>
+      <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61572591812810">Trimex Colleges - Library</a></p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Existing event listener for viewBooksBtn
+    document.getElementById('viewBooksBtn').addEventListener('click', function() {
+      window.location.href = 'jss/book.html';
+    });
+
+    // Additional JS for fade-out transition on viewBooksBtn click
+    document.getElementById('viewBooksBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      document.body.classList.add('fade-out');
+      setTimeout(function() {
+        window.location.href = 'jss/book.html';
+      }, 1000);
+    }, true);
+
+    // Modal Image Script
+    document.querySelectorAll('.img-modal-trigger').forEach(img => {
+      img.addEventListener('click', function() {
+        const src = this.getAttribute('src');
+        document.getElementById('modalImage').setAttribute('src', src);
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        modal.show();
+      });
+    });
+
+    /*
+    * RFID Scanner Script
+    */
+    let rfidBuffer = "";
+    let rfidTimeout = null;
+    const rfidOverlay = document.getElementById("rfidOverlay");
+    const profileImage = document.getElementById("profileImage");
+    const userName = document.getElementById("userName");
+    const userLibraryId = document.getElementById("userLibraryId");
+    const attendanceMessage = document.getElementById("attendanceMessage");
+
+    document.addEventListener("keydown", function(e) {
+      if (rfidTimeout) {
+        clearTimeout(rfidTimeout);
+      }
+      rfidTimeout = setTimeout(() => {
+        rfidBuffer = "";
+      }, 300);
+
+      if (e.key === "Enter") {
+        const rfid = rfidBuffer.trim();
+        rfidBuffer = "";
+
+        if (rfid !== "") {
+          fetch("record_attendance.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "rfid=" + encodeURIComponent(rfid)
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === "success") {
+              const user = data.user;
+              profileImage.src = user.profile_image ? user.profile_image : "img/placeholder.png";
+              userName.textContent = user.firstname + " " + user.lastname;
+              userLibraryId.textContent = "Library ID: " + user.library_id;
+              attendanceMessage.textContent = data.action + " at " + data.timestamp;
+              rfidOverlay.style.display = "flex";
+              // Keep the overlay visible for 10 seconds (10000 ms)
+              setTimeout(() => {
+                hideOverlay();
+              }, 10000);
+            } else {
+              document.getElementById("errorModalBody").textContent = "Account or ID does not exist.";
+              const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+              errorModal.show();
+            }
+          })
+          .catch(err => {
+            console.error("Error:", err);
+            alert("An error occurred while processing the RFID.");
+          });
+        }
+      } else {
+        rfidBuffer += e.key;
+      }
+    });
+
+    function hideOverlay() {
+      rfidOverlay.style.display = "none";
+    }
+
+    // Smooth Scroll to Footer (Contact Us)
+    document.querySelectorAll('.nav-link[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+/* Global Styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  color: #333;
+  min-height: 100vh;
+  padding-top: 80px; /* Add space for fixed navbar */
+}
+a { text-decoration: none; color: inherit; }
+
+/* Full-Width Fixed Navbar */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #7B1113;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav a { color: #fff; font-size: 1.1em; font-weight: 500; }
+nav a:hover { opacity: 0.9; }
+
+/* Section Container */
+.section-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+h2 { text-align: center; margin-bottom: 25px; color: #333; }
+.um-message { text-align: center; margin-bottom: 20px; color: green; font-weight: 500; }
+
+/* Form Styles */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+.form-card {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px 25px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+.form-card:hover { transform: translateY(-5px); }
+.form-card h3 { margin-bottom: 15px; text-align: center; color: #7B1113; }
+form label { display: block; margin-top: 15px; font-weight: 500; }
+form input[type="text"], form input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 80px;
+  transition: border-color 0.3s ease;
+}
+form input[type="text"]:focus, form input[type="date"]:focus {
+  border-color: #7B1113;
+  outline: none;
+}
+form input[type="submit"] {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  background-color: #7B1113;
+  color: #fff;
+  font-size: 1em;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+form input[type="submit"]:hover { background-color: #990f17; }
+@media (max-width: 768px) {
+  .form-container { flex-direction: column; gap: 20px; }
+}

@@ -1,0 +1,128 @@
+ /* Base Reset & Styles */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 70px; /* Give space for fixed navbar */
+  }
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  /* Navbar Styles */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #7B1113;
+    padding: 12px 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  .navbar .logo {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  .nav-links a:hover {
+    background-color: #990f17;
+  }
+
+  /* Messages & Headings */
+  .um-message {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #28a745;
+    font-weight: 500;
+  }
+  h2 {
+    margin-bottom: 20px;
+    color: #7B1113;
+    text-align: center;
+  }
+  h3 {
+    margin: 30px 0 15px;
+    color: #555;
+  }
+
+  /* Section Container */
+  .section-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+  }
+
+  /* Table Styles */
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  .user-table th,
+  .user-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .user-table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    color: #333;
+  }
+  .user-table tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Buttons */
+  .action-buttons {
+    display: inline-flex;  /* Keeps buttons side-by-side */
+    gap: 8px;             /* Spacing between them */
+    vertical-align: middle;
+  }
+  .action-button {
+    background-color: #7B1113;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+  }
+  .action-button:hover {
+    background-color: #990f17;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .user-table th,
+    .user-table td {
+      padding: 10px;
+    }
+    .action-button {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+  }

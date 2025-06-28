@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Hardcover Image Book (41 Pages)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Embedded CSS for Interactive Book and Transitions -->
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 20px;
+      background: url("BG.avif") no-repeat center center;
+      background-size: cover;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    /* Smooth transition animations */
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+    .fade-out {
+      animation: fadeOut 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    /* Navbar Styles - Full Width, No Horizontal Space */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #333;
+      color: #fff;
+      padding: 10px 0; /* Removed horizontal padding */
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+    }
+    .navbar .back-btn {
+      background-color: #555;
+      border: none;
+      padding: 8px 16px;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      margin-left: 20px; /* Added margin for aesthetic spacing */
+    }
+    .navbar .back-btn:hover {
+      background-color: #777;
+    }
+    /* Page Wrapper to control fade transition and avoid navbar overlap */
+    #pageWrapper {
+      margin-top: 60px;
+    }
+    /* Flipbook Container Wrapper */
+    #flipbook-container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
+    }
+    /* Interactive Book Container */
+    #flipbook {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+    }
+    /* Center Shadow to simulate the book's seam */
+    #centerShadow {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 30px;
+      height: 100%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 2000;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0),
+        rgba(0,0,0,0.15) 50%,
+        rgba(0,0,0,0) 100%
+      );
+    }
+    /* Page Styles */
+    #flipbook .page {
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Hard Cover (for Front and Back) */
+    .cover.hard, .back-cover.hard {
+      border: 8px solid #333;
+      overflow: hidden;
+    }
+    .cover.hard img, .back-cover.hard img,
+    /* Interior pages too */
+    #flipbook .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+    /* Optional cover text overlay */
+    .cover::before, .back-cover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .cover-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: #fff;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+  /* Flipbook Container: smaller size on mobile */
+  #flipbook-container {
+    width: 80vw;      /* Reduced width from 90vw to 80vw */
+    height: 50vh;     /* Reduced height from 60vh to 50vh */
+    margin: 80px auto 0; /* Keeps it centered horizontally and leaves space for the navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Flipbook fills its container */
+  #flipbook {
+    width: 100% !important;
+    height: 60% !important;
+  }
+  /* Each page fills the container */
+  #flipbook .page {
+    width: 100%;
+    height: 60%;
+  }
+/* Desktop: Wider shadow */
+#centerShadow {
+  width: 0px; /* or 40px, etc. */
+}
+  #centerShadow {
+    width: 0px; /* shrink shadow width for smaller screens */
+  }
+}
+
+
+  </style>
+  
+  <!-- jQuery and Turn.js Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="turn.js"></script>
+</head>
+<body>
+  <!-- Navbar with Back Button -->
+  <nav class="navbar">
+    <button class="back-btn" id="backBtn">Back</button>
+  </nav>
+
+  <!-- Page Wrapper with fade-in effect -->
+  <div id="pageWrapper" class="fade-in">
+    <div id="flipbook-container">
+      <div id="flipbook">
+        <!-- Front Cover (Page 1) -->
+        <div class="page cover hard">
+          <img src="piksur/1.png" alt="Front Cover Picture">
+          <div class="cover-text"></div>
+        </div>
+        
+        <!-- Content Pages (Pages 2 - 40) -->
+        <!-- Replace these with your actual content images -->
+        <div class="page"><img src="piksur/2.png" alt="Page 2"></div>
+        <div class="page"><img src="piksur/3.png" alt="Page 3"></div>
+        <div class="page"><img src="piksur/5.png" alt="Page 4"></div>
+        <div class="page"><img src="piksur/6.png" alt="Page 5"></div>
+        <div class="page"><img src="piksur/4.png" alt="Page 6"></div>
+        <div class="page"><img src="piksur/7.png" alt="Page 7"></div>
+        <div class="page"><img src="piksur/8.png" alt="Page 8"></div>
+        <div class="page"><img src="piksur/9.png" alt="Page 9"></div>
+        <div class="page"><img src="piksur/10.png" alt="Page 10"></div>
+        <div class="page"><img src="piksur/11.png" alt="Page 11"></div>
+        <div class="page"><img src="piksur/12.png" alt="Page 12"></div>
+        <div class="page"><img src="piksur/13.png" alt="Page 13"></div>
+        <div class="page"><img src="piksur/13.png" alt="Page 13"></div>
+        
+        <div class="page">
+          <!-- Placeholder for additional content -->
+        </div>
+        
+        <!-- Back Cover (Page 41) -->
+        <div class="page back-cover hard">
+          <img src="piksur/14.png" alt="Back Cover Picture">
+          <div class="cover-text"></div>
+        </div>
+      </div>
+      <div id="centerShadow"></div>
+    </div>
+  </div>
+  
+  <script>
+    $(document).ready(function() {
+      // Initialize the flipbook
+      $("#flipbook").turn({
+        pages: 41,
+        width: 800,
+        height: 600,
+        autoCenter: true,
+        gradients: true,
+        elevation: 80
+      })
+      .bind("start", function(event, pageObj, corner) {
+        $("#centerShadow").hide();
+      })
+      .bind("turned", function(event, pageObj, corner) {
+        $("#centerShadow").show();
+      });
+
+      // Back button smooth transition to index.html
+      $('#backBtn').on('click', function(e) {
+        e.preventDefault();
+        // Trigger fade-out animation on the page wrapper
+        $('#pageWrapper').removeClass('fade-in').addClass('fade-out');
+        // After the fade-out completes, navigate back to index.html
+        setTimeout(function() {
+          window.location.href = '../index.html';
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>

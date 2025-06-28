@@ -1,0 +1,184 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    transition: opacity 0.8s ease; /* For smooth fade-out */
+  }
+
+  /* Fade Out Animation Class */
+  .fade-out {
+    opacity: 0;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Professional Navbar */
+  .navbar {
+    background-color: #222;
+    width: 100%;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .back-btn {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+  }
+
+  .back-btn:hover {
+    opacity: 0.8;
+  }
+
+  .navbar-brand {
+    font-family: 'Merriweather', serif;
+    color: white !important;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  /* Admin Icon on Navbar */
+  .admin-icon {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  .admin-icon:hover {
+    opacity: 0.8;
+  }
+
+  /* Welcome Message Styling (Increased Font Size) */
+  .welcome-msg {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 46px;
+    color: #333;
+    font-family: 'Merriweather', serif;
+    width: 100%;
+  }
+
+  /* Container for the login options */
+  .container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container-box {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: slideIn 1s ease forwards;
+    margin-bottom: 15%;
+  }
+
+  .logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #444;
+  }
+
+  /* Button Options */
+  .btn-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    color: black;
+  }
+
+  .btn-option i {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  .student, .faculty {
+    background: #f8f9fa;
+    border: 2px solid #333;
+  }
+
+  .student:hover, .faculty:hover {
+    background: #b71c1c;
+    color: white;
+    transform: scale(1.03);
+  }
+
+  @media only screen and (max-width: 600px) {
+    .navbar {
+        padding: 25px 25px;
+    }
+    .back-btn {
+        font-size: 12px;
+        display: none;
+    }
+    .navbar-brand {
+        font-size: 18px;
+    }
+    .admin-icon {
+        display: none; /* Hide admin icon sa mobile view */
+    }
+    .welcome-msg {
+        font-size: 32px;
+       margin-top:30%;
+    }
+    .container {
+        margin-top: 5px; /* Optional: Bawasan ang gap mula sa welcome message */
+        
+    }
+    .container-box {
+
+        padding: 20px;
+        max-width: 90%;
+        height:65%;
+       
+        margin-bottom: 55%;
+    }
+    .btn-option {
+        padding: 12px;
+        font-size: 16px;
+    }
+  }
+  
+  

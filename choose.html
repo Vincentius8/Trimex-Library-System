@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trimex Library Login</title>
+  <link rel="icon" type="image/x-icon" href="img/LIBRARY LOGO.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts (Professional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="css/c.css">
+</head>
+<body>
+
+  <!-- Professional Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK</a>
+    <span class="navbar-brand"></span>
+    <!-- Admin icon in navbar; clicking this goes to admin_login.php -->
+    <a href="admin_login.php" class="admin-icon" title="Admin Login"><i class="fas fa-user-cog"></i></a>
+  </nav>
+
+  <!-- Welcome Message -->
+  <div class="welcome-msg">
+    Welcome Trimexians!
+  </div>
+
+  <!-- Container to wrap the content -->
+  <div class="container">
+    <div class="container-box">
+      <img src="img/LIBRARY LOGO.png" alt="Trimex Library Logo" class="logo">
+      <h2>Choose Who You Are</h2>
+
+      <!-- Student Button -->
+      <a href="student_login.php" class="btn-option student">
+        <i class="fas fa-user-graduate"></i> STUDENT
+      </a>
+
+      <!-- Teachers/Faculty Button -->
+      <a href="faculty_login.php" class="btn-option faculty">
+        <i class="fas fa-chalkboard-teacher"></i> TEACHERS / STAFF
+      </a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JavaScript for Typewriter Effect and Button Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Typewriter Effect for Welcome Message
+      const welcomeMsg = document.querySelector('.welcome-msg');
+      const text = welcomeMsg.textContent;
+      welcomeMsg.textContent = "";
+      let index = 0;
+      
+      function typeWriter() {
+        if (index < text.length) {
+          welcomeMsg.textContent += text.charAt(index);
+          index++;
+          setTimeout(typeWriter, 100); // Adjust typing speed (100ms delay)
+        }
+      }
+      typeWriter();
+      
+      // Function to add fade-out animation and redirect
+      function animateAndRedirect(element, href) {
+        element.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 800);
+        });
+      }
+      
+      // Animate Back Button
+      const backBtn = document.querySelector('.back-btn');
+      animateAndRedirect(backBtn, backBtn.getAttribute('href'));
+      
+      // Animate Student Button
+      const studentBtn = document.querySelector('.student');
+      animateAndRedirect(studentBtn, studentBtn.getAttribute('href'));
+      
+      // Animate Teachers/Faculty Button
+      const facultyBtn = document.querySelector('.faculty');
+      animateAndRedirect(facultyBtn, facultyBtn.getAttribute('href'));
+      
+      // Animate Admin Icon in Navbar
+      const adminIcon = document.querySelector('.admin-icon');
+      animateAndRedirect(adminIcon, adminIcon.getAttribute('href'));
+    });
+  </script>
+</body>
+</html>

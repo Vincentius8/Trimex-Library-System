@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Hardcover Image Book (41 Pages)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Embedded CSS for Interactive Book -->
+  <style>
+    /* Reset default margins/padding and enforce no scrolling. */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Prevent any scroll bars */
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    /* Body background with full-height flex container */
+    body {
+      display: flex;
+      flex-direction: column;
+      background: url("BG.avif") no-repeat center center;
+      background-size: cover;
+    }
+
+    /* Top Bar */
+    #topbar {
+      width: 100%;
+      height: 60px;
+      /* Semi-transparent white background */
+      background-color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed; /* Keeps the bar at the top */
+      top: 0;
+      left: 0;
+      z-index: 9999;
+    }
+    #topbar a {
+      /* Black text color */
+      color: #000;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+      transition: background-color 0.2s ease;
+    }
+    #topbar a:hover {
+      /* Slight darkening on hover for visual feedback */
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Main Content Wrapper */
+    main {
+      margin-top: 80px; /* Push flipbook below top bar */
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Flipbook Container Wrapper */
+    #flipbook-container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+    }
+
+    /* Interactive Book Container */
+    #flipbook {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    /*
+      Center Shadow:
+      A soft gradient to simulate the seam of the book.
+    */
+    #centerShadow {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 30px;
+      height: 100%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 2000;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0),
+        rgba(0,0,0,0.15) 50%,
+        rgba(0,0,0,0) 100%
+      );
+    }
+
+    /* Page Styles */
+    #flipbook .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hard Cover (for Front and Back) */
+    .cover.hard, .back-cover.hard {
+      border: 8px solid #333;
+      overflow: hidden;
+    }
+    .cover.hard img, .back-cover.hard img,
+    #flipbook .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    /* Cover text overlay (optional) */
+    .cover::before, .back-cover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .cover-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: #fff;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      padding: 20px;
+    }
+  </style>
+
+  <!-- jQuery and Turn.js Libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="turn.js"></script>
+
+  <!-- Additional CSS to mimic book.html navbar style -->
+  <!-- NOTE: No code has been removed or reduced; only the following is appended -->
+  <style>
+    /* Mimic book.html navbar styling */
+    #topbar {
+      background-color: #333 !important;
+      padding: 10px 0 !important;
+    }
+    #topbar a {
+      color: #fff !important;
+      font-size: 1rem;
+      padding: 8px 16px !important;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    #topbar a:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR with BACK BUTTON -->
+  <div id="topbar">
+    <a href="../admin_dashboard.php">← Back</a>
+  </div>
+
+  <main>
+    <div id="flipbook-container">
+      <div id="flipbook">
+        <!-- Front Cover (Page 1) -->
+        <div class="page cover hard">
+          <img src="1.png" alt="Front Cover Picture">
+          <div class="cover-text"></div>
+        </div>
+
+        <!-- Content Pages (Pages 2 - 40) -->
+        <div class="page"><img src="pics/2.png" alt="Page 2"></div>
+        <div class="page"><img src="pics/3.png" alt="Page 3"></div>
+        <div class="page"><img src="pics/4.png" alt="Page 4"></div>
+        <div class="page"><img src="pics/5.png" alt="Page 5"></div>
+        <div class="page"><img src="pics/6.png" alt="Page 6"></div>
+        <div class="page"><img src="pics/7.png" alt="Page 7"></div>
+        <div class="page"><img src="pics/8.png" alt="Page 8"></div>
+        <div class="page"><img src="pics/9.png" alt="Page 9"></div>
+        <div class="page"><img src="pics/10.png" alt="Page 10"></div>
+        <div class="page"><img src="pics/11.png" alt="Page 11"></div>
+        <div class="page"><img src="pics/12.png" alt="Page 12"></div>
+        <div class="page"><img src="pics/13.png" alt="Page 13"></div>
+        <div class="page"><img src="pics/14.png" alt="Page 14"></div>
+        <div class="page"><img src="pics/15.png" alt="Page 15"></div>
+        <div class="page"><img src="pics/16.png" alt="Page 16"></div>
+        <div class="page"><img src="pics/17.png" alt="Page 17"></div>
+        <div class="page"><img src="pics/18.png" alt="Page 18"></div>
+        <div class="page"><img src="pics/19.png" alt="Page 19"></div>
+        <div class="page"><img src="pics/20.png" alt="Page 20"></div>
+        <div class="page"><img src="pics/21.png" alt="Page 21"></div>
+        <div class="page"><img src="pics/22.png" alt="Page 22"></div>
+        <div class="page"><img src="pics/23.png" alt="Page 23"></div>
+        <div class="page"><img src="pics/24.png" alt="Page 24"></div>
+        <div class="page"><img src="pics/25.png" alt="Page 25"></div>
+        <div class="page"><img src="pics/26.png" alt="Page 26"></div>
+        <div class="page"><img src="pics/27.png" alt="Page 27"></div>
+        <div class="page"><img src="pics/28.png" alt="Page 28"></div>
+        <div class="page"><img src="pics/29.png" alt="Page 29"></div>
+        <div class="page"><img src="pics/30.png" alt="Page 30"></div>
+        <div class="page"><img src="pics/31.png" alt="Page 31"></div>
+        <div class="page"><img src="pics/32.png" alt="Page 32"></div>
+        <div class="page"><img src="pics/33.png" alt="Page 33"></div>
+        <div class="page"><img src="pics/34.png" alt="Page 34"></div>
+        <div class="page"><img src="pics/35.png" alt="Page 35"></div>
+        <div class="page"><img src="pics/36.png" alt="Page 36"></div>
+        
+        <!-- Extra page if needed -->
+        <div class="page"></div>
+        
+        <!-- Back Cover (Page 41) -->
+        <div class="page back-cover hard">
+          <img src="back.png" alt="Front Cover Picture">
+          <div class="cover-text"></div>
+        </div>
+      </div>
+      <div id="centerShadow"></div>
+    </div>
+  </main>
+
+  <script>
+    $(document).ready(function() {
+      $("#flipbook").turn({
+        pages: 41,
+        width: 800,
+        height: 600,
+        autoCenter: true,
+        gradients: true,
+        elevation: 80
+      })
+      .bind("start", function() {
+        $("#centerShadow").hide();
+      })
+      .bind("turned", function() {
+        $("#centerShadow").show();
+      });
+    });
+  </script>
+</body>
+</html>
