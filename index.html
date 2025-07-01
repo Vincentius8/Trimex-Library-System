@@ -963,15 +963,25 @@ footer a {
     </div>
   </section>
 
-  <!-- Fullscreen Overlay for RFID Reading -->
-  <div id="rfidOverlay">
-    <div id="overlayContent">
-      <img id="profileImage" src="img/placeholder.png" alt="User Profile">
-      <h2 id="userName"></h2>
-      <p id="userLibraryId"></p>
-      <p id="attendanceMessage"></p>
+  <!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content text-center">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="successModalLabel">Attendance Recorded</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalProfileImage" src="img/placeholder.png" class="rounded-circle mb-3" width="120" height="120">
+        <h4 id="modalUserName"></h4>
+        <p id="modalLibraryId" class="mb-1"></p>
+        <p id="modalTimeIn" class="mb-1 text-success fw-bold"></p>
+        <p id="modalTimeOut" class="mb-0 text-danger fw-bold"></p>
+      </div>
     </div>
   </div>
+</div>
+
 
   <!-- Error Modal for RFID Not Found -->
   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
@@ -1005,103 +1015,108 @@ footer a {
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    // Existing event listener for viewBooksBtn
-    document.getElementById('viewBooksBtn').addEventListener('click', function() {
+ <script>
+  // Fade-out transition and navigation
+  document.getElementById('viewBooksBtn')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
       window.location.href = 'jss/book.html';
+    }, 1000);
+  });
+
+  // Modal Image Preview
+  document.querySelectorAll('.img-modal-trigger').forEach(img => {
+    img.addEventListener('click', function () {
+      const src = this.getAttribute('src');
+      document.getElementById('modalImage').setAttribute('src', src);
+      const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+      modal.show();
     });
+  });
 
-    // Additional JS for fade-out transition on viewBooksBtn click
-    document.getElementById('viewBooksBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      document.body.classList.add('fade-out');
-      setTimeout(function() {
-        window.location.href = 'jss/book.html';
-      }, 1000);
-    }, true);
+  // RFID Attendance Logic
+let rfidBuffer = "";
+let rfidTimeout = null;
 
-    // Modal Image Script
-    document.querySelectorAll('.img-modal-trigger').forEach(img => {
-      img.addEventListener('click', function() {
-        const src = this.getAttribute('src');
-        document.getElementById('modalImage').setAttribute('src', src);
-        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-        modal.show();
-      });
-    });
+const rfidOverlay = document.getElementById("rfidOverlay");
+const profileImage = document.getElementById("profileImage");
+const userName = document.getElementById("userName");
+const userLibraryId = document.getElementById("userLibraryId");
+const attendanceMessage = document.getElementById("attendanceMessage");
 
-    /*
-    * RFID Scanner Script
-    */
-    let rfidBuffer = "";
-    let rfidTimeout = null;
-    const rfidOverlay = document.getElementById("rfidOverlay");
-    const profileImage = document.getElementById("profileImage");
-    const userName = document.getElementById("userName");
-    const userLibraryId = document.getElementById("userLibraryId");
-    const attendanceMessage = document.getElementById("attendanceMessage");
+document.addEventListener("keydown", function (e) {
+  if (rfidTimeout) clearTimeout(rfidTimeout);
 
-    document.addEventListener("keydown", function(e) {
-      if (rfidTimeout) {
-        clearTimeout(rfidTimeout);
-      }
-      rfidTimeout = setTimeout(() => {
-        rfidBuffer = "";
-      }, 300);
+  rfidTimeout = setTimeout(() => {
+    rfidBuffer = "";
+  }, 300);
 
-      if (e.key === "Enter") {
-        const rfid = rfidBuffer.trim();
-        rfidBuffer = "";
+  if (e.key === "Enter") {
+    const rfid = rfidBuffer.trim();
+    rfidBuffer = "";
 
-        if (rfid !== "") {
-          fetch("record_attendance.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: "rfid=" + encodeURIComponent(rfid)
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === "success") {
-              const user = data.user;
-              profileImage.src = user.profile_image ? user.profile_image : "img/placeholder.png";
-              userName.textContent = user.firstname + " " + user.lastname;
-              userLibraryId.textContent = "Library ID: " + user.library_id;
-              attendanceMessage.textContent = data.action + " at " + data.timestamp;
-              rfidOverlay.style.display = "flex";
-              // Keep the overlay visible for 10 seconds (10000 ms)
-              setTimeout(() => {
-                hideOverlay();
-              }, 10000);
-            } else {
-              document.getElementById("errorModalBody").textContent = "Account or ID does not exist.";
-              const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-              errorModal.show();
-            }
-          })
-          .catch(err => {
-            console.error("Error:", err);
-            alert("An error occurred while processing the RFID.");
-          });
-        }
-      } else {
-        rfidBuffer += e.key;
-      }
-    });
+    if (rfid !== "") {
+      fetch("record_attendance.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "rfid=" + encodeURIComponent(rfid)
+      })
+        .then(response => response.text())
+        .then(text => {
+          const data = JSON.parse(text); // No try/catch here — if error, JS will crash silently
 
-    function hideOverlay() {
-      rfidOverlay.style.display = "none";
+         if (data.status === "success") {
+  document.getElementById("modalProfileImage").src = data.user.profile_image || "img/placeholder.png";
+  document.getElementById("modalUserName").textContent = data.user.firstname + " " + data.user.lastname;
+  document.getElementById("modalLibraryId").textContent = "Library ID: " + data.user.library_id;
+  document.getElementById("modalTimeIn").textContent = "Time In: " + (data.time_in || "N/A");
+  document.getElementById("modalTimeOut").textContent = data.time_out ? "Time Out: " + data.time_out : "";
+
+  const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+  successModal.show();
+
+  // ✅ Hide success modal after 6 seconds
+  setTimeout(() => successModal.hide(), 6000);
+
+  profileImage.src = data.user.profile_image || "img/placeholder.png";
+  userName.textContent = data.user.firstname + " " + data.user.lastname;
+  userLibraryId.textContent = "Library ID: " + data.user.library_id;
+  attendanceMessage.textContent = data.action + " at " + data.timestamp;
+  rfidOverlay.style.display = "flex";
+
+  setTimeout(hideOverlay, 10000);
+}
+ else {
+            // Display error from server
+            document.getElementById("errorModalBody").textContent = data.message || "Account or ID does not exist.";
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+          }
+        });
     }
+  } else {
+    rfidBuffer += e.key;
+  }
+});
 
-    // Smooth Scroll to Footer (Contact Us)
-    document.querySelectorAll('.nav-link[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
+function hideOverlay() {
+  rfidOverlay.style.display = "none";
+}
+
+  // Smooth scroll to footer/contact
+  document.querySelectorAll('.nav-link[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
