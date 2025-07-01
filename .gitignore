@@ -15,3 +15,5 @@ Thumbs.db
 # IDE configs
 .vscode/
 .idea/
+debug_rfid.txt 
+*.sql 
